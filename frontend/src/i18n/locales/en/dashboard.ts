@@ -3,7 +3,7 @@ export default {
     title: 'Dashboard',
     welcomeMessage: "Welcome back! Here's an overview of your account.",
     balance: 'Balance',
-    apiKeys: 'API Keys',
+    apiKeys: 'Bestloong API Keys',
     todayRequests: 'Today Requests',
     todayCost: 'Today Cost',
     todayTokens: 'Today Tokens',
@@ -32,6 +32,9 @@ export default {
       disabled: 'Disabled',
     },
     tokenUsageTrend: 'Token Usage Trend',
+    expenseTrend: 'Expense Trend',
+    actualPaidDistribution: 'Actual Paid Amount Distribution',
+    actualPaidAmount: 'Actual Paid Amount',
     noDataAvailable: 'No data available',
     model: 'Model',
     group: 'Group',
@@ -49,8 +52,8 @@ export default {
     startUsingApi: 'Start using the API to see your usage history here.',
     viewAllUsage: 'View all usage',
     quickActions: 'Quick Actions',
-    createApiKey: 'Create API Key',
-    generateNewKey: 'Generate a new API key',
+    createApiKey: 'Create Bestloong API Key',
+    generateNewKey: 'Generate a new Bestloong API key',
     batchImageAgent: 'Batch Image Assistant',
     batchImageAgentDesc: 'Copy instructions for an agent',
     viewUsage: 'View Usage',
@@ -66,8 +69,8 @@ export default {
 
   // API Keys
   keys: {
-    title: 'API Keys',
-    description: 'Manage your API keys and access tokens',
+    title: 'Bestloong API Keys',
+    description: 'Manage your Bestloong API keys and access tokens',
     searchPlaceholder: 'Search name or key...',
     endpoints: {
       title: 'API Endpoints',
@@ -156,7 +159,7 @@ export default {
     lastUsedIP: 'Last Used IP',
     useKey: 'Use Key',
     useKeyModal: {
-      title: 'Use API Key',
+      title: 'Use Bestloong API Key',
       description:
         'Add the following environment variables to your terminal profile or run directly in terminal to configure API access.',
       copy: 'Copy',
@@ -355,6 +358,7 @@ export default {
     resetPending: 'Pending refresh',
     accountMultiplier: 'Account rate',
     avgDuration: 'Avg Duration',
+    elapsed: 'Duration',
     inSelectedRange: 'in selected range',
     perRequest: 'per request',
     apiKeyFilter: 'API Key',
@@ -658,12 +662,29 @@ export default {
     noSearchResult: 'No matching models',
     anonymousHint: 'Sign in to see your exclusive groups and personal rates',
     filters: {
+      categoryLabel: 'Model categories',
+      orHint: 'OR filter: models matching any selected category are shown',
       platformLabel: 'Platform',
       groupLabel: 'Group',
       rateLabel: 'Rate',
       modelLabel: 'Model',
       searchPlaceholder: 'Search models',
       all: 'All'
+    },
+    card: {
+      capability: 'Capabilities and limits',
+      useCases: 'Use cases',
+      tier: 'Tier condition',
+      inputPrice: 'Input',
+      outputPrice: 'Output',
+      cacheRead: 'Cache read',
+      cacheWrite: 'Cache write',
+      glossary: 'Terms',
+      copyCallName: 'Copy model ID',
+      copySuccess: 'Model ID copied',
+      viewDetails: 'View full details for {name}',
+      tieredBilling: 'Tiered billing',
+      standardBilling: 'Standard billing'
     },
     badges: {
       exclusive: 'Exclusive',
@@ -782,6 +803,7 @@ export default {
     codeRule3: 'Contact support if you have issues redeeming a code',
     codeRule4: 'Balance and concurrency updates are immediate',
     recentActivity: 'Recent Activity',
+    exchangeRecords: 'Redemption Records',
     historyWillAppear: 'Your redemption history will appear here',
     balanceAddedRedeem: 'Balance Added (Redeem)',
     balanceAddedAffiliate: 'Balance Added (Affiliate Transfer)',
@@ -800,7 +822,19 @@ export default {
     historyLoadFailed: 'Failed to load activity. Please try again.',
     userRefreshFailed: 'Redeemed successfully, but failed to refresh account information.',
     subscriptionRefreshFailed: 'Redeemed successfully, but failed to refresh subscription status.',
-    pleaseEnterCode: 'Please enter a redeem code'
+    pleaseEnterCode: 'Please enter a redeem code',
+    myBalance: 'My Balance',
+    balanceHistory: 'Balance History',
+    balanceHistoryDescription: 'Redemption, usage charges, and recharge records.',
+    balanceHistoryEmpty: 'No balance changes yet',
+    balanceTime: 'Time',
+    balanceType: 'Type',
+    balanceAmount: 'Change',
+    balanceAfter: 'Balance After',
+    balanceReference: 'Reference',
+    balanceTypeRedeem: 'Redemption',
+    balanceTypeCharge: 'Usage charge',
+    balanceTypeRecharge: 'Recharge'
   },
 
   // Profile

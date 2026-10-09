@@ -121,6 +121,7 @@ describe('feature route guard', () => {
   })
 
   it('waits for the first public-settings request before deciding payment access', async () => {
+    authStore.isAdmin = true
     const deferred = createDeferred<{ payment_enabled: boolean }>()
     appStore.fetchPublicSettings.mockImplementation(async () => {
       const settings = await deferred.promise
@@ -145,7 +146,7 @@ describe('feature route guard', () => {
     ['risk control', { requiresRiskControl: true }, '/admin/risk-control'],
     ['subscription', { requiresSubscription: true }, '/subscriptions'],
   ])('does not treat a failed %s settings load as explicitly disabled', async (_name, meta, path) => {
-    authStore.isAdmin = meta.requiresRiskControl === true
+    authStore.isAdmin = true
     appStore.fetchPublicSettings.mockResolvedValue(null)
 
     const { navigation, next } = runGuard(meta, path)
@@ -181,7 +182,7 @@ describe('feature route guard', () => {
 
 describe('subscription route guard (opt-out flag)', () => {
   beforeEach(() => {
-    authStore.isAdmin = false
+    authStore.isAdmin = true
     authStore.isSimpleMode = false
     appStore.publicSettingsLoaded = true
     appStore.fetchPublicSettings.mockReset()
@@ -190,7 +191,7 @@ describe('subscription route guard (opt-out flag)', () => {
   it.each([
     ['missing key', {}],
     ['explicit true', { subscription_enabled: true }],
-  ])('lets /subscriptions through when the flag is %s', async (_name, settings) => {
+  ])('lets administrators through when the flag is %s', async (_name, settings) => {
     appStore.cachedPublicSettings = settings
 
     const { navigation, next } = runGuard({ requiresSubscription: true }, '/subscriptions')
@@ -208,5 +209,55 @@ describe('subscription route guard (opt-out flag)', () => {
     await navigation
 
     expect(next).toHaveBeenCalledWith('/admin/dashboard')
+  })
+})
+
+describe('Bestloong TOB customer route guard', () => {
+  beforeEach(() => {
+    authStore.isAuthenticated = true
+    authStore.isAdmin = false
+    authStore.isSimpleMode = false
+    appStore.publicSettingsLoaded = true
+    appStore.cachedPublicSettings = {}
+    appStore.fetchPublicSettings.mockReset()
+  })
+
+  it.each([
+    '/subscriptions',
+    '/purchase',
+    '/orders',
+    '/available-channels',
+    '/affiliate',
+    '/batch-image',
+    '/custom/legacy-page',
+  ])('redirects a regular customer away from %s', async (path) => {
+    const { navigation, next } = runGuard({}, path)
+    await navigation
+
+    expect(next).toHaveBeenCalledOnce()
+    expect(next).toHaveBeenCalledWith('/dashboard')
+  })
+
+  it('keeps hidden customer routes available to administrators', async () => {
+    authStore.isAdmin = true
+
+    const { navigation, next } = runGuard({}, '/orders')
+    await navigation
+
+    expect(next).toHaveBeenCalledOnce()
+    expect(next).toHaveBeenCalledWith()
+  })
+
+  it('requires authentication for the model plaza route', async () => {
+    authStore.isAuthenticated = false
+
+    const { navigation, next } = runGuard({}, '/model-plaza')
+    await navigation
+
+    expect(next).toHaveBeenCalledOnce()
+    expect(next).toHaveBeenCalledWith({
+      path: '/login',
+      query: { redirect: '/model-plaza' },
+    })
   })
 })

@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import PlazaGroupSection from '../PlazaGroupSection.vue'
 import PlazaModelPricingTable from '../PlazaModelPricingTable.vue'
+import GroupBadge from '@/components/common/GroupBadge.vue'
 import type { ModelPlazaGroup, PlazaModel } from '@/api/modelPlaza'
 
 vi.mock('vue-i18n', async () => {
@@ -32,6 +33,17 @@ function ladderModel(tiers: number): PlazaModel {
   return {
     name: 'gpt-5.6-sol',
     platform: 'openai',
+    display_name: 'GPT-5.6 Sol',
+    capability: 'test',
+    use_cases: 'test',
+    categories: ['代码'],
+    tier_condition: '<272K',
+    input_price: '¥1',
+    output_price: '¥2',
+    cache_read_price: '¥0.1',
+    cache_write_price: '¥0.2',
+    glossary: 'test',
+    launch_date: '2026-01-01',
     pricing: {
       billing_mode: 'token',
       input_price: 5e-6,
@@ -76,9 +88,9 @@ function group(overrides: Partial<ModelPlazaGroup> = {}): ModelPlazaGroup {
   }
 }
 
-function mountSection(g: ModelPlazaGroup) {
+function mountSection(g: ModelPlazaGroup, showRateDetails = true) {
   return mount(PlazaGroupSection, {
-    props: { group: g },
+    props: { group: g, showRateDetails },
     global: {
       stubs: {
         GroupBadge: true,
@@ -140,6 +152,25 @@ describe('PlazaGroupSection 高峰配置传递', () => {
     // appStore mock 无 server_utc_offset,窗口描述不带时区标注
     expect(table.props('peakWindow')).toBe('14:00-18:00 ×1.5')
     expect(table.props('peakRateMultiplier')).toBe(1.5)
+  })
+
+  it('隐藏倍率详情时不披露倍率、订阅和高峰信息', () => {
+    const wrapper = mountSection(
+      group({
+        subscription_type: 'subscription',
+        peak_rate_enabled: true,
+        peak_start: '14:00',
+        peak_end: '18:00',
+        peak_rate_multiplier: 1.5
+      }),
+      false
+    )
+
+    expect(wrapper.findComponent(GroupBadge).props('showRate')).toBe(false)
+    expect(wrapper.text()).not.toContain('modelPlaza.badges.subscription')
+    expect(wrapper.text()).not.toContain('modelPlaza.detail.peakNote')
+    expect(wrapper.findComponent(PlazaModelPricingTable).props('showRateDetails')).toBe(false)
+    expect(wrapper.findComponent(PlazaModelPricingTable).props('peakWindow')).toBe('')
   })
 
   it('分组未启用高峰时窗口描述为空串', () => {

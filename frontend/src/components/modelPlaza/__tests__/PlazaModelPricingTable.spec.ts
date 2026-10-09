@@ -17,6 +17,17 @@ function tokenModel(overrides: Partial<PlazaModel> = {}): PlazaModel {
   return {
     name: 'claude-sonnet',
     platform: 'anthropic',
+    display_name: 'Claude Sonnet',
+    capability: 'test',
+    use_cases: 'test',
+    categories: ['文本'],
+    tier_condition: '<272K',
+    input_price: '¥1',
+    output_price: '¥2',
+    cache_read_price: '¥0.1',
+    cache_write_price: '¥0.2',
+    glossary: 'test',
+    launch_date: '2026-01-01',
     pricing: {
       billing_mode: 'token',
       input_price: 3e-6,
@@ -50,6 +61,7 @@ function mountTable(
     videoRateMultiplier?: number | null
     peakWindow?: string
     peakRateMultiplier?: number | null
+    showRateDetails?: boolean
   }
 ) {
   return mount(PlazaModelPricingTable, {
@@ -134,6 +146,19 @@ describe('PlazaModelPricingTable', () => {
     model.pricing!.reasoning_effort_multipliers = { max: 0, high: Infinity, unknown: 2, low: 1 }
     const wrapper = mountTable([model], 1)
     expect(wrapper.findAll('[data-reasoning-effort]').map(badge => badge.attributes('data-reasoning-effort'))).toEqual(['low'])
+  })
+
+  it('hides all rate details without changing the calculated paid price', () => {
+    const model = tokenModel()
+    model.pricing!.max_reasoning_effort_multiplier = 3
+    const wrapper = mountTable([model], 1, 0.8, { showRateDetails: false })
+
+    expect(wrapper.text()).toContain('$2.40')
+    expect(wrapper.text()).toContain('$12.00')
+    expect(wrapper.text()).not.toContain('modelPlaza.table.rate')
+    expect(wrapper.text()).not.toContain('modelPlaza.table.maxReasoningMultiplierBadge')
+    expect(wrapper.text()).not.toContain('0.8x')
+    expect(wrapper.findAll('tbody tr').at(0)?.findAll('td')).toHaveLength(7)
   })
 
   it('倍率 ≠ 1 时价格列为折后实付价,官方价列保持原价', () => {

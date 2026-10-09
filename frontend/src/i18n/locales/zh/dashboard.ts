@@ -3,7 +3,7 @@ export default {
     title: '仪表盘',
     welcomeMessage: '欢迎回来！这是您账户的概览。',
     balance: '余额',
-    apiKeys: 'API 密钥',
+    apiKeys: 'Bestloong API 密钥',
     todayRequests: '今日请求',
     todayCost: '今日消费',
     todayTokens: '今日 Token',
@@ -32,6 +32,9 @@ export default {
       disabled: '已禁用',
     },
     tokenUsageTrend: 'Token 使用趋势',
+    expenseTrend: '费用趋势',
+    actualPaidDistribution: '实付金额分布',
+    actualPaidAmount: '实付金额',
     noDataAvailable: '暂无数据',
     model: '模型',
     group: '分组',
@@ -49,8 +52,8 @@ export default {
     startUsingApi: '开始使用 API 后，您的使用历史将显示在这里。',
     viewAllUsage: '查看全部',
     quickActions: '快捷操作',
-    createApiKey: '创建 API 密钥',
-    generateNewKey: '生成新的 API 密钥',
+    createApiKey: '创建 Bestloong API 密钥',
+    generateNewKey: '生成新的 Bestloong API 密钥',
     batchImageAgent: '批量生图助手',
     batchImageAgentDesc: '复制给 Agent 的任务说明',
     viewUsage: '查看使用记录',
@@ -66,8 +69,8 @@ export default {
 
   // API Keys
   keys: {
-    title: 'API 密钥',
-    description: '管理您的 API 密钥和访问令牌',
+    title: 'Bestloong API 密钥',
+    description: '管理您的 Bestloong API 密钥和访问令牌',
     searchPlaceholder: '搜索名称或Key...',
     endpoints: {
       title: 'API 端点',
@@ -156,7 +159,7 @@ export default {
     lastUsedIP: '最近使用 IP',
     useKey: '使用密钥',
     useKeyModal: {
-      title: '使用 API 密钥',
+      title: '使用 Bestloong API 密钥',
       description: '将以下环境变量添加到您的终端配置文件或直接在终端中运行。',
       copy: '复制',
       copied: '已复制',
@@ -360,6 +363,7 @@ export default {
     resetPending: '待刷新',
     accountMultiplier: '账号倍率',
     avgDuration: '平均耗时',
+    elapsed: '用时',
     inSelectedRange: '所选范围内',
     perRequest: '每次请求',
     apiKeyFilter: 'API 密钥',
@@ -663,12 +667,29 @@ export default {
     noSearchResult: '没有匹配的模型',
     anonymousHint: '登录后可查看你的专属分组与专属倍率',
     filters: {
+      categoryLabel: '模型类别',
+      orHint: '已按并集筛选：命中任一所选类别即可显示',
       platformLabel: '平台',
       groupLabel: '分组',
       rateLabel: '倍率',
       modelLabel: '模型',
       searchPlaceholder: '搜索模型名称',
       all: '全部'
+    },
+    card: {
+      capability: '能力边界',
+      useCases: '适用场景',
+      tier: '档位条件',
+      inputPrice: '输入价',
+      outputPrice: '输出价',
+      cacheRead: '缓存读',
+      cacheWrite: '缓存写',
+      glossary: '术语解释',
+      copyCallName: '复制调用名',
+      copySuccess: '调用名已复制',
+      viewDetails: '查看 {name} 完整信息',
+      tieredBilling: '阶梯计费',
+      standardBilling: '标准计费'
     },
     badges: {
       exclusive: '专属分组',
@@ -786,6 +807,7 @@ export default {
     codeRule3: '如有兑换问题，请联系客服',
     codeRule4: '余额和并发数即时更新',
     recentActivity: '最近活动',
+    exchangeRecords: '兑换记录',
     historyWillAppear: '您的兑换历史将显示在这里',
     balanceAddedRedeem: '余额充值（兑换）',
     balanceAddedAffiliate: '余额充值（返利转入）',
@@ -804,7 +826,19 @@ export default {
     historyLoadFailed: '加载兑换记录失败，请重试。',
     userRefreshFailed: '兑换成功，但账户信息刷新失败。',
     subscriptionRefreshFailed: '兑换成功，但订阅状态刷新失败。',
-    pleaseEnterCode: '请输入兑换码'
+    pleaseEnterCode: '请输入兑换码',
+    myBalance: '我的余额',
+    balanceHistory: '余额变动流水',
+    balanceHistoryDescription: '显示兑换入账、扣费和充值记录。',
+    balanceHistoryEmpty: '暂无余额变动记录',
+    balanceTime: '时间',
+    balanceType: '类型',
+    balanceAmount: '变动额',
+    balanceAfter: '变动后余额',
+    balanceReference: '关联单号',
+    balanceTypeRedeem: '兑换入账',
+    balanceTypeCharge: '扣费',
+    balanceTypeRecharge: '充值'
   },
 
   // Profile

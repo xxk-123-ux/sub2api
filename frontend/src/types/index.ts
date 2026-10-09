@@ -1976,6 +1976,7 @@ export interface UsageStatsResponse {
   total_cost: number // 标准计费
   total_actual_cost: number // 实际扣除
   average_duration_ms: number
+  average_latency_ms?: number
   models?: Record<string, number>
   endpoints?: EndpointStat[]
   upstream_endpoints?: EndpointStat[]
