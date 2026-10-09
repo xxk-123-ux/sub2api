@@ -1,7 +1,7 @@
 # Work Buddy 接入 Bestloong
 
 > 适用对象：已开通 Bestloong（界面显示名 Bestloongai）账号、需要在 Work Buddy 客户端中调用 Bestloong API 的用户。
-> 接口地址（Base URL）：`https://token.bestloongai.com/v1`（OpenAI 兼容格式）
+> 接口地址（Base URL）：`https://tk.bestloongai.com/v1`（OpenAI 兼容格式）
 
 ## 一、前置准备
 - 已注册 Bestloong 账号并登录
@@ -26,7 +26,7 @@
 
 2. 在弹出的「添加模型」表单中按如下填写：
    - **供应商**：选择「自定义」（仅支持 OpenAI 兼容协议 API）
-   - **接口地址**：`https://token.bestloongai.com/v1`
+   - **接口地址**：`https://tk.bestloongai.com/v1`
    - **API Key**：粘贴步骤二复制的密钥
    - **模型名称**：填写你要使用的模型调用名（如 `gpt-5.6-sol`，可在 Bestloong「模型广场」查看）
    - **高级配置**：勾选「工具调用」「图片输入」「思考模式」「允许关闭思考」（按需）
@@ -50,4 +50,4 @@
 ## 五、常见问题
 - **401 未授权**：密钥复制不完整或未生效，重新复制 `sk-` 开头密钥。
 - **404 找不到模型**：接口地址漏写 `/v1`，或模型名与「模型广场」调用名不一致。
-- **请求超时**：接口地址填写错误，或网络无法访问 `token.bestloongai.com`。
+- **请求超时**：接口地址填写错误，或网络无法访问 `tk.bestloongai.com`。

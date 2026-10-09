@@ -2,7 +2,7 @@
 
 > 适用对象：已开通 Bestloong（界面显示名 Bestloongai）账号、需要在 Windows 上运行 Codex（OpenAI Codex CLI）并调用 Bestloong API 的用户。
 > 配置方式：使用 CC Switch 桌面应用统一管理 Codex 的供应商配置（免手动改配置文件）。
-> 接口地址（Base URL）：`https://token.bestloongai.com/v1`（OpenAI 兼容格式）
+> 接口地址（Base URL）：`https://tk.bestloongai.com/v1`（OpenAI 兼容格式）
 
 ## 一、前置准备
 - 已注册 Bestloong 账号并登录
@@ -49,9 +49,9 @@ Bestloong 平台支持通过 `ccswitch://` 深度链接，将 Bestloong 供应�
 
 3. 在自定义供应商表单中按如下填写：
    - **供应商名称**：`Bestloong`（便于在列表里识别）
-   - **官网链接**（可选）：`https://token.bestloongai.com`
+   - **官网链接**（可选）：`https://tk.bestloongai.com`
    - **API Key**：粘贴步骤二复制的 `sk-` 密钥
-   - **API 请求地址**：`https://token.bestloongai.com/v1`（表单下方提示"填写兼容 OpenAI Response 格式的服务端点地址"，与平台协议一致，直接填即可）
+   - **API 请求地址**：`https://tk.bestloongai.com/v1`（表单下方提示"填写兼容 OpenAI Response 格式的服务端点地址"，与平台协议一致，直接填即可）
 
 <div align="center">
   <img src="images/cs-02.png" alt="CC Switch 自定义供应商表单——填入供应商名称、官网链接、API Key、API 请求地址" style="max-width:100%; width:720px;" />
@@ -80,7 +80,7 @@ Bestloong 平台支持通过 `ccswitch://` 深度链接，将 Bestloong 供应�
 - **401 未授权**：密钥复制不完整或未生效，重新复制 `sk-` 开头密钥；并确认 CC Switch 中该供应商已"启用"。
 - **404 找不到模型**：接口地址漏写 `/v1`，或模型名与「模型广场」调用名不一致。
 - **配置不生效**：切换供应商后需**重启 Codex / 重开终端**；CC Switch 仅改写配置文件，运行中的会话不会热加载。
-- **请求超时**：接口地址填写错误，或网络无法访问 `token.bestloongai.com`。
+- **请求超时**：接口地址填写错误，或网络无法访问 `tk.bestloongai.com`。
 
 ---
 

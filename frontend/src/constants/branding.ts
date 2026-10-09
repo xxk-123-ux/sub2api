@@ -2,7 +2,7 @@
 export const BESTLOONG_UI_NAME = 'Bestloongai'
 export const BESTLOONG_TUTORIAL_NAME = 'Bestloong'
 export const BESTLOONG_API_NAME = 'Bestloong API'
-export const BESTLOONG_BASE_URL = 'https://token.bestloongai.com/v1'
+export const BESTLOONG_BASE_URL = 'https://tk.bestloongai.com/v1'
 
 export function resolveDefaultBrandLogo(): string {
   return typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
